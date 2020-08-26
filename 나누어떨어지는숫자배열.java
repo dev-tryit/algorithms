@@ -1,20 +1,15 @@
 import java.util.*;
+import java.util.stream.*;
 
 class Solution {
     public int[] solution(int[] arr, int divisor) {
-        PriorityQueue<Integer> pq = new PriorityQueue<>((next,prev)->{
-            if(prev.intValue()>next.intValue()) return -1;
-            return 1;
-        });
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
         
         for(int v : arr) {
             if(v%divisor == 0) pq.add(v);
-        }
+        }        
         
-        int[] answer = new int[pq.size()];
-        for(int i=0;i<answer.length;i++) { //여기에 pq.size쓰면 안된다. pq가 작아지므로....... 
-            answer[i] = pq.poll();
-        }
+        int[] answer = Stream.generate(pq::poll).limit(pq.size()).mapToInt(a->a).toArray();
         return answer.length!=0 ? answer : new int[]{-1};
     }
     
