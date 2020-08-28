@@ -2,7 +2,7 @@ import java.util.*;
 
 class Solution {
     public String[] solution(String[] strings, int n) {
-        return Arrays.stream(strings).sorted((nextS,prevS)->{
+        Arrays.sort(strings, (nextS,prevS)->{
             char prev = prevS.charAt(n);
             char next = nextS.charAt(n);
             
@@ -11,6 +11,8 @@ class Solution {
             }
             
             return prev>next ? -1 : 1;            
-        }).toArray(String[]::new);
+        });
+        
+        return strings;
     }
 }
